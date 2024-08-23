@@ -1,0 +1,8 @@
+[package]
+name = "payment_tracker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+leptos = { version = "0.6.14", features = ["csr", "nightly"] }
+rusqlite = "0.32.1"
