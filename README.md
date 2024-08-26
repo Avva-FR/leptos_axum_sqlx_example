@@ -1,90 +1,49 @@
-<picture>
-    <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
-    <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
-</picture>
 
-# Leptos Axum Starter Template
+# Database Setup
+Since this project is deployed on Fedora39 I refer to :https://docs.fedoraproject.org/en-US/quick-docs/postgresql/.
+The setup on other distros follows the same steps, changing the package manager. 
 
-This is a template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool using [Axum](https://github.com/tokio-rs/axum).
+## Installing the DB-Server
+1. ```sudo dnf install postgresql-server postgresql-contrib```
+2. ```sudo systemctl enable postgresql```
+3. ```sudo postgresql-setup --initdb --unit postgresql```
+4. ```sudo systemctl start postgresql```
+## User and DB Creation
+1. ```sudo -u postgres psql```
+2. ```postgres=# CREATE USER your_user_account WITH PASSWORD 'some_pw';```
 
-## Creating your template repo
-
-If you don't have `cargo-leptos` installed you can install it with
-
-```bash
-cargo install cargo-leptos --locked
+3. ```postgres=# CREATE DATABASE my_project OWNER lenny```
+4. ```postgres=# \password postgres``` 
+5. ```psql my_project```
+## Changing Identification
+```sudo nvim /var/lib/pgsql/data/pg_hba.conf```
+Change: 
 ```
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
 
-Then run
-```bash
-cargo leptos new --git leptos-rs/start-axum
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            ident
+# IPv6 local connections:
+host    all             all             ::1/128                 ident
 ```
-
-to generate a new project template.
-
-```bash
-cd leptos-axum-proj
+ To:
 ```
-
-to go to your newly created project.  
-Feel free to explore the project structure, but the best place to start with your application code is in `src/app.rs`.  
-Addtionally, Cargo.toml may need updating as new versions of the dependencies are released, especially if things are not working after a `cargo update`.
-
-## Running your project
-
-```bash
-cargo leptos watch
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
 ```
+# Requirements
 
-## Installing Additional Tools
+DB-Migrations need to be executed ahead of calling the query! macro otherwise the macro will fail and abort compilation. ```cargo install sqlx-cli```
 
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
+I refer to: https://book.leptos.dev/ and https://github.com/leptos-rs/cargo-leptos/blob/main/README.md for a more detailed setup. The minimum Requirements include:
 
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-3. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-4. `npm install -g sass` - install `dart-sass` (should be optional in future
-
-## Compiling for Release
-```bash
-cargo leptos build --release
-```
-
-Will generate your server binary in target/server/release and your site package in target/site
-
-## Testing Your Project
-```bash
-cargo leptos end-to-end
-```
-
-```bash
-cargo leptos end-to-end --release
-```
-
-Cargo-leptos uses Playwright as the end-to-end test tool.  
-Tests are located in end2end/tests directory.
-
-## Executing a Server on a Remote Machine Without the Toolchain
-After running a `cargo leptos build --release` the minimum files needed are:
-
-1. The server binary located in `target/server/release`
-2. The `site` directory and all files within located in `target/site`
-
-Copy these files to your remote server. The directory structure should be:
-```text
-leptos-axum-proj
-site/
-```
-Set the following environment variables (updating for your project as needed):
-```text
-LEPTOS_OUTPUT_NAME="leptos-axum-proj"
-LEPTOS_SITE_ROOT="site"
-LEPTOS_SITE_PKG_DIR="pkg"
-LEPTOS_SITE_ADDR="127.0.0.1:3000"
-LEPTOS_RELOAD_PORT="3001"
-```
-Finally, run the server binary.
-
-## Licensing
-
-This template itself is released under the Unlicense. You should replace the LICENSE for your own application with an appropriate license if you plan to release it publicly.
+1. ```cargo install cargp-leptos```
+2. ```rustup target add wasm32-unknown-unknown```
+ ## Quick Start
+Run ```cargo leptos watch``` to run the application.
