@@ -5,10 +5,29 @@ use leptos_router::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
 pub struct User {
     username: String,
     email: String,
     password: String,
+}
+
+// this might need to be a single connection instead of a pool at creation time 
+#[cfg(feature = "ssr")]
+pub mod ssr {
+    use leptos::{ev::pointercancel, ServerFnError};
+    use serde::de::Error;
+    use sqlx::postgres::PgErrorOptions;
+    
+    pub async fn create_db_conn() -> Result<(), Box<dyn std::error::Error>> {
+        let pool = PgPoolOptions::new()
+        let url = "postgres://avva:SomeFancyPwd@localhost:5432/leptos_proj";
+        .max_connections(5) 
+        .connect(url)
+        .await?;
+    Ok(())
+
+    }
 }
 
 // Entry point for the application

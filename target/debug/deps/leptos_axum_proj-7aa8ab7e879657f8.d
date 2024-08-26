@@ -6,3 +6,5 @@ src/lib.rs:
 src/app.rs:
 src/error_template.rs:
 src/fileserv.rs:
+
+# env-dep:CARGO_MANIFEST_DIR=/home/avva/Documents/rust_projects/leptos_project
