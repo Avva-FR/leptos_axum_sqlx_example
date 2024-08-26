@@ -1,0 +1,13 @@
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/libtracing-5520df629ab41baa.rmeta: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/macros.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/dispatcher.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/field.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/instrument.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/level_filters.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/span.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/stdlib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/subscriber.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/tracing-5520df629ab41baa.d: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/macros.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/dispatcher.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/field.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/instrument.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/level_filters.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/span.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/stdlib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/subscriber.rs
+
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/lib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/macros.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/dispatcher.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/field.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/instrument.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/level_filters.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/span.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/stdlib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tracing-0.1.40/src/subscriber.rs:

@@ -1,0 +1,11 @@
+/home/avva/Documents/rust_projects/leptos_project/target/front/wasm32-unknown-unknown/debug/deps/libconvert_case-c8685b28e6cc126c.rmeta: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/case.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/converter.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/pattern.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/segmentation.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/front/wasm32-unknown-unknown/debug/deps/libconvert_case-c8685b28e6cc126c.rlib: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/case.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/converter.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/pattern.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/segmentation.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/front/wasm32-unknown-unknown/debug/deps/convert_case-c8685b28e6cc126c.d: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/case.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/converter.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/pattern.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/segmentation.rs
+
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/lib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/case.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/converter.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/pattern.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/convert_case-0.6.0/src/segmentation.rs:

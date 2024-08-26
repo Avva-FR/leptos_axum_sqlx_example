@@ -1,0 +1,10 @@
+/home/avva/Documents/rust_projects/leptos_project/target/front/debug/deps/libtyped_builder_macro-8b0f2ec5a1c8c84a.so: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/builder_attr.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/field_info.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/mutator.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/struct_info.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/util.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/front/debug/deps/typed_builder_macro-8b0f2ec5a1c8c84a.d: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/builder_attr.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/field_info.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/mutator.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/struct_info.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/util.rs
+
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/lib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/builder_attr.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/field_info.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/mutator.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/struct_info.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/typed-builder-macro-0.18.2/src/util.rs:

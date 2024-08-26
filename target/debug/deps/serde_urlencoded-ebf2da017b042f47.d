@@ -1,0 +1,11 @@
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/libserde_urlencoded-ebf2da017b042f47.rmeta: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/de.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/mod.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/key.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/pair.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/part.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/value.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/serde_urlencoded-ebf2da017b042f47.d: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/de.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/mod.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/key.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/pair.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/part.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/value.rs
+
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/lib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/de.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/mod.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/key.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/pair.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/part.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_urlencoded-0.7.1/src/ser/value.rs:

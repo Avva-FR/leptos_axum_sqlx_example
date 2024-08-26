@@ -1,0 +1,11 @@
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/libserde_test-83ff11f53cd2571f.rmeta: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/assert.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/configure.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/de.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/error.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/ser.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/token.rs
+
+/home/avva/Documents/rust_projects/leptos_project/target/debug/deps/serde_test-83ff11f53cd2571f.d: /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/lib.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/assert.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/configure.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/de.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/error.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/ser.rs /home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/token.rs
+
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/lib.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/assert.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/configure.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/de.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/error.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/ser.rs:
+/home/avva/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_test-1.0.177/src/token.rs:

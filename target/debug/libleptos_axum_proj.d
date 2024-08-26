@@ -1,0 +1,1 @@
+/home/avva/Documents/rust_projects/leptos_project/target/debug/libleptos_axum_proj.so: /home/avva/Documents/rust_projects/leptos_project/src/app.rs /home/avva/Documents/rust_projects/leptos_project/src/error_template.rs /home/avva/Documents/rust_projects/leptos_project/src/lib.rs
