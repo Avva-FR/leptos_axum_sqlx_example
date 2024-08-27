@@ -45,5 +45,8 @@ I refer to: https://book.leptos.dev/ and https://github.com/leptos-rs/cargo-lept
 
 1. ```cargo install cargp-leptos```
 2. ```rustup target add wasm32-unknown-unknown```
+In order to handle chnages in the .sql files without having to change the code :  
+1. ```cargo install slqx-cli```
+2. ```migrate build-script``` 
  ## Quick Start
 Run ```cargo leptos watch``` to run the application.
