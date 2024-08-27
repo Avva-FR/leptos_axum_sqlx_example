@@ -12,21 +12,37 @@ pub struct User {
     password: String,
 }
 
+// adding user to db
+#[cfg(feature = "ssr")]
+pub async fn add_user_to_db(user: &User) -> Result<(), ServerFnError>  {
+    use self::ssr::*;
+    let pool = create_db_conn().await?;
+    // fake API delay
+    std::thread::sleep(std::time::Duration::from_millis(1250));
+
+    // Insert new user into db
+    let query = "INSERT INTO user_table (username, email, password) VALUES ($1, $2, $3)";
+    let query_result  = sqlx::query(&query)
+    .bind(&user.username)
+    .bind(&user.email)
+    .bind(&user.password)
+    .execute(&pool)
+    .await;
+    match query_result {
+        Ok(_row) => Ok(()),
+        Err(e) => Err(ServerFnError::ServerError(e.to_string())),
+    }
+    }
+
 // this might need to be a single connection instead of a pool at creation time 
 #[cfg(feature = "ssr")]
 pub mod ssr {
-    use leptos::{ev::pointercancel, ServerFnError};
-    use serde::de::Error;
-    use sqlx::postgres::PgErrorOptions;
-    
-    pub async fn create_db_conn() -> Result<(), Box<dyn std::error::Error>> {
-        let pool = PgPoolOptions::new()
+    use leptos::ServerFnError;
+    use sqlx::postgres::PgPool;
+    pub async fn create_db_conn() -> Result<PgPool, ServerFnError> {
         let url = "postgres://avva:SomeFancyPwd@localhost:5432/leptos_proj";
-        .max_connections(5) 
-        .connect(url)
-        .await?;
-    Ok(())
-
+        let pool = PgPool::connect(url).await?;
+        Ok(pool)
     }
 }
 
@@ -93,21 +109,19 @@ fn Register() -> impl IntoView {
 
     // Use conditional compilation to access PgPool only on SSR
     #[cfg(feature = "ssr")]
-    let pool = use_context::<PgPool>().expect("Pool not found");
-
     view! {
         <Nav />
         <form on:submit = move |ev| {
             ev.prevent_default();
-            let username = username.get();
-            let email = email.get();
-            let pwd = pwd.get();
-            let confirmpwd = confirmpwd.get();
-
-            if pwd == confirmpwd {
+            if pwd.get() == confirmpwd.get() {
                 #[cfg(feature = "ssr")]
                 spawn_local(async move {
-                    match add_user_to_db(pool.clone(), username, email, pwd).await {
+                    let user = User {
+                        username: username.get(),
+                        email: email.get(),
+                        password: pwd.get(),
+                    };
+                    match add_user_to_db(&user).await {
                         Ok(_) => logging::log!("Registered user"),
                         Err(err) => logging::log!("Failed to register user: {:?}", err),
                     }
@@ -162,21 +176,6 @@ fn Register() -> impl IntoView {
         <button type="submit">Register</button>
     </form>
     }
-}
-
-#[cfg(feature = "ssr")]
-pub async fn add_user_to_db(pool: PgPool, username: String, email: String, pwd: String) -> Result<(), sqlx::Error> {
-    // Insert new user into db
-    sqlx::query(
-        "INSERT INTO users (username, email, pwd) VALUES ($1, $2, $3)"
-    )
-    .bind(username)
-    .bind(email)
-    .bind(pwd)
-    .execute(&pool)
-    .await?;
-
-    Ok(())
 }
 
 #[component]

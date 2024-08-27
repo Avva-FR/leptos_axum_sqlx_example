@@ -1,1 +1,0 @@
-cargo:rustc-env=MIME_TYPES_GENERATED_PATH=/home/avva/Documents/rust_projects/leptos_project/target/debug/build/mime_guess-4b54b052d06ee397/out/mime_types_generated.rs

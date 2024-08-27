@@ -1,1 +1,0 @@
-/home/avva/Documents/rust_projects/leptos_project/target/front/wasm32-unknown-unknown/debug/libleptos_axum_proj.rlib: /home/avva/Documents/rust_projects/leptos_project/src/app.rs /home/avva/Documents/rust_projects/leptos_project/src/error_template.rs /home/avva/Documents/rust_projects/leptos_project/src/lib.rs
