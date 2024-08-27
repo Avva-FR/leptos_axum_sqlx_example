@@ -15,6 +15,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);
 
+
      // DB: Connection pool for PostgreSQL
     let db_conn_pool = create_db_conn().await.expect("DB connection failed");
  

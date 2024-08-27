@@ -3,6 +3,8 @@ use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 use serde::{Deserialize, Serialize};
+use leptos::ServerFnError;
+use std::format;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -12,27 +14,43 @@ pub struct User {
     password: String,
 }
 
-// adding user to db
+// finding user in db
+// Add user to the database
 #[cfg(feature = "ssr")]
-pub async fn add_user_to_db(user: &User) -> Result<(), ServerFnError>  {
+pub async fn add_user_to_db(user: &User) -> Result<(), ServerFnError> {
     use self::ssr::*;
+    println!("entered add_user_fn");
+    
     let pool = create_db_conn().await?;
-    // fake API delay
+    // Simulate an API delay
     std::thread::sleep(std::time::Duration::from_millis(1250));
-
-    // Insert new user into db
-    let query = "INSERT INTO user_table (username, email, password) VALUES ($1, $2, $3)";
-    let query_result  = sqlx::query(&query)
+    
+    // check if the user allready exists
+    let exists: (bool,) = sqlx::query_as(
+        "SELECT EXISTS (SELECT 1 FROM user_table WHERE username = $1)"
+    )
     .bind(&user.username)
-    .bind(&user.email)
-    .bind(&user.password)
-    .execute(&pool)
-    .await;
-    match query_result {
-        Ok(_row) => Ok(()),
-        Err(e) => Err(ServerFnError::ServerError(e.to_string())),
+    .fetch_one(&pool)
+    .await?;
+
+    if exists.0 {
+        eprintln!("Error: User already exists: username = '{}'", user.username);
+        return Err(ServerFnError::ServerError("User already exists".to_string()));
     }
-    }
+    // if the username does not allready exist we store it in the db
+    let query = "INSERT INTO user_table (username, email, password) VALUES ($1, $2, $3)";
+    sqlx::query(query)
+        .bind(&user.username)
+        .bind(&user.email)
+        .bind(&user.password)
+        .execute(&pool)
+        .await?;
+    
+    println!("User added successfully: {:?}", user);
+
+    Ok(())
+}
+
 
 // this might need to be a single connection instead of a pool at creation time 
 #[cfg(feature = "ssr")]
@@ -100,6 +118,7 @@ fn HomePage() -> impl IntoView {
 }
 
 // Register Page Component
+// @ TODO fix render and form issue
 #[component]
 fn Register() -> impl IntoView {
     let (email, set_email) = create_signal(String::new());
@@ -112,6 +131,7 @@ fn Register() -> impl IntoView {
     view! {
         <Nav />
         <form on:submit = move |ev| {
+            println!("Submit button pressed");
             ev.prevent_default();
             if pwd.get() == confirmpwd.get() {
                 #[cfg(feature = "ssr")]
@@ -122,12 +142,12 @@ fn Register() -> impl IntoView {
                         password: pwd.get(),
                     };
                     match add_user_to_db(&user).await {
-                        Ok(_) => logging::log!("Registered user"),
-                        Err(err) => logging::log!("Failed to register user: {:?}", err),
+                        Ok(_) => println!("Registered user"),
+                        Err(err) => println!("Failed to register user: {:?}", err),
                     }
                 });
             } else {
-                logging::log!("Passwords do not match!");
+                println!("Passwords do not match!");
             }
         }>
         <label for="username"><b>Username</b></label>
