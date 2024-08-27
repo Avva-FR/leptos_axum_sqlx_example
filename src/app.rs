@@ -1,23 +1,30 @@
+use crate::app;
 use crate::error_template::{AppError, ErrorTemplate};
+use html::em;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 use serde::{Deserialize, Serialize};
 use leptos::ServerFnError;
-use std::format;
+use leptos::ev::SubmitEvent;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
 pub struct User {
     username: String,
     email: String,
-    password: String,
+    pwd: String,
 }
 
-// finding user in db
-// Add user to the database
+// not redundant
+#[server(RegisterUser, "/register")]
+pub async fn pass_register_input(user: User) -> Result<(), ServerFnError> {
+    add_user_to_db(user).await
+}
+
+// adds user to db
 #[cfg(feature = "ssr")]
-pub async fn add_user_to_db(user: &User) -> Result<(), ServerFnError> {
+pub async fn add_user_to_db(user: User) -> Result<(), ServerFnError> {
     use self::ssr::*;
     println!("entered add_user_fn");
     
@@ -38,11 +45,11 @@ pub async fn add_user_to_db(user: &User) -> Result<(), ServerFnError> {
         return Err(ServerFnError::ServerError("User already exists".to_string()));
     }
     // if the username does not allready exist we store it in the db
-    let query = "INSERT INTO user_table (username, email, password) VALUES ($1, $2, $3)";
+    let query = "INSERT INTO user_table (username, email, pwd) VALUES ($1, $2, $3)";
     sqlx::query(query)
         .bind(&user.username)
         .bind(&user.email)
-        .bind(&user.password)
+        .bind(&user.pwd)
         .execute(&pool)
         .await?;
     
@@ -118,85 +125,82 @@ fn HomePage() -> impl IntoView {
 }
 
 // Register Page Component
-// @ TODO fix render and form issue
 #[component]
+// @ TODO fix render and form issue
 fn Register() -> impl IntoView {
-    let (email, set_email) = create_signal(String::new());
+    // Create the action using the RegisterUser server function
+    let register_action = create_server_action::<RegisterUser>();
+
     let (username, set_username) = create_signal(String::new());
+    let (email, set_email) = create_signal(String::new());
     let (pwd, set_pwd) = create_signal(String::new());
     let (confirmpwd, set_confirmpwd) = create_signal(String::new());
 
-    // Use conditional compilation to access PgPool only on SSR
-    #[cfg(feature = "ssr")]
+    let on_submit = move |ev: SubmitEvent| {
+        ev.prevent_default(); // Prevent the default form submission
+
+        if pwd.get() != confirmpwd.get() {
+            println!("Passwords do not match!");
+        } else {
+            // Dispatch the action with the form data
+            register_action.dispatch(app::RegisterUser { user: User {
+                username: username.get().clone(),
+                email: email.get().clone(),
+                pwd: pwd.get().clone(),
+        } });
+
+        }
+    };
+
     view! {
         <Nav />
-        <form on:submit = move |ev| {
-            println!("Submit button pressed");
-            ev.prevent_default();
-            if pwd.get() == confirmpwd.get() {
-                #[cfg(feature = "ssr")]
-                spawn_local(async move {
-                    let user = User {
-                        username: username.get(),
-                        email: email.get(),
-                        password: pwd.get(),
-                    };
-                    match add_user_to_db(&user).await {
-                        Ok(_) => println!("Registered user"),
-                        Err(err) => println!("Failed to register user: {:?}", err),
-                    }
-                });
-            } else {
-                println!("Passwords do not match!");
-            }
-        }>
-        <label for="username"><b>Username</b></label>
-        <input
-            type="text"
-            placeholder="Enter Username"
-            name="username"
-            id="username"
-            on:input=move |ev| set_username(event_target_value(&ev)) 
-            prop:value=username
-            required
-        />
+        <h2>"Register"</h2>
+        <ActionForm action=register_action on:submit=on_submit>
+            <label for="username"><b>"Username"</b></label>
+            <input
+                type="text"
+                placeholder="Enter Username"
+                id="username"
+                name="username"
+                on:input=move |ev| set_username(event_target_value(&ev))
+                required
+            />
 
-        <label for="email"><b>Email</b></label>
-        <input
-            type="text"
-            placeholder="Enter Email"
-            name="email"
-            id="email"
-            on:input=move |ev| set_email(event_target_value(&ev))
-            prop:value=email
-            required
-        />
+            <label for="email"><b>"Email"</b></label>
+            <input
+                type="email"
+                placeholder="Enter Email"
+                id="email"
+                name="email"
+                on:input=move |ev| set_email(event_target_value(&ev))
+                required
+            />
 
-        <label for="pwd"><b>Password</b></label>
-        <input
-            type="password"
-            placeholder="Enter Password"
-            name="pwd"
-            id="pwd"
-            on:input=move |ev| set_pwd(event_target_value(&ev))
-            prop:value=pwd
-            required
-        />
-        <label for="confirmpwd"><b>Confirm Password</b></label>
-        <input
-            type="password"
-            placeholder="Please reenter the Password"
-            name="confirmpwd"
-            id="confirmpwd"
-            on:input=move |ev| set_confirmpwd(event_target_value(&ev))
-            prop:value=confirmpwd
-            required
-        />
-    
-        <button type="submit">Register</button>
-    </form>
+            <label for="pwd"><b>"Password"</b></label>
+            <input
+                type="password"
+                placeholder="Enter Password"
+                id="pwd"
+                name="pwd"
+                on:input=move |ev| set_pwd(event_target_value(&ev))
+                required
+            />
+
+            <label for="confirmpwd"><b>"Confirm Password"</b></label>
+            <input
+                type="password"
+                placeholder="Please reenter the Password"
+                id="confirmpwd"
+                name="confirmpwd"
+                on:input=move |ev| set_confirmpwd(event_target_value(&ev))
+                required
+            />
+
+            <button type="submit">"Register"</button>
+        </ActionForm>
     }
 }
+
 
 #[component]
 fn About() -> impl IntoView {
