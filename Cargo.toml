@@ -24,6 +24,10 @@ http = "1"
 serde = "1.0.209"
 regex = "1.10.6"
 
+# jippity
+llm = {git = "https://github.com/rustformers/llm.git", branch="main", optional=true}
+rand = {version = "0.8.5", optional = true}
+
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
@@ -38,6 +42,8 @@ ssr = [
     "leptos_router/ssr",
     "dep:tracing",
     "dep:sqlx",
+    "dep:llm",
+    "dep:rand",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
