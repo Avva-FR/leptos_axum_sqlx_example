@@ -2,3 +2,12 @@ body {
 	font-family: sans-serif;
 	text-align: center;
 }
+
+// Nav
+.logo path {
+    transition: fill 0.9s ease;
+}
+
+.logo:hover path {
+    fill: #a7db7c; 
+}
