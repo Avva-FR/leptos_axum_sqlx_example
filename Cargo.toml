@@ -27,6 +27,8 @@ regex = "1.10.6"
 # jippity
 llm = {git = "https://github.com/rustformers/llm.git", branch="main", optional=true}
 rand = {version = "0.8.5", optional = true}
+dotenv = {version = "0.15.0", optional = true}
+cfg-if = "1.0.0"
 
 
 [features]
@@ -44,7 +46,12 @@ ssr = [
     "dep:sqlx",
     "dep:llm",
     "dep:rand",
+    "dep:dotenv",
 ]
+
+#optimization level for llm
+[profile.dev.package.ggml-sys]
+opt-level = 3
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]

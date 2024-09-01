@@ -25,6 +25,8 @@ pub fn Nav() -> impl IntoView {
             </a>
             |
             <a href="/login">Login</a>
+            |
+            <a href="/jippity">Jippity</a>
             | 
             <a href="/about">About</a>
             |

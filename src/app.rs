@@ -1,10 +1,12 @@
-use crate::components::{home::Home, about::About, register::Register, login::Login};
+use crate::components::{
+    about::About, home::Home, jippity::Jippity, login::Login, register::Register,
+};
 use crate::error_template::{AppError, ErrorTemplate};
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 
-// dont touch this sqlx imports into any file with #[components] will break compilation 
+// dont touch this sqlx imports into any file with #[components] will break compilation
 // import this config instead
 #[cfg(feature = "ssr")]
 pub mod ssr {
@@ -39,10 +41,10 @@ pub fn App() -> impl IntoView {
                     <Route path="" view=Home/>
                     <Route path="/register" view=Register/>
                     <Route path="/login" view=Login/>
-                    <Route path="/about" view=About/> 
+                    <Route path="/jippity" view=Jippity/>
+                    <Route path="/about" view=About/>
                 </Routes>
             </main>
         </Router>
     }
 }
-
