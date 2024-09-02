@@ -70,26 +70,31 @@ pub fn Login() -> impl IntoView {
         <Nav />
         <h2>"Login"</h2>
         <ActionForm action=login_action on:submit=on_submit>
-            <label for="username"><b>"Username"</b></label>
-            <input
-                type="text"
-                placeholder="Enter Username"
-                id="username"
-                name="username"
-                on:input= move |ev| set_username(event_target_value(&ev))
-                required
-            />
+        <div class="form-floating mb-3">
+        <input
+            type="text"
+            class="form-control"
+            id="login-floating-username"
+            placeholder="Enter Username"
+            name="username"
+            on:input= move |ev| set_username(event_target_value(&ev))
+            required
+        />
+        </div>
+        // pwd
+        <div class="form-floating mb-3">
+        <input
+            type="password"
+            class="form-control"
+            id="login-floating-password"
+            placeholder="Password"
+            name="pwd"
+            on:input=move |ev| set_pwd(event_target_value(&ev))
+            required
+        />
+        </div>
 
-            <label for="pwd"><b>"Password"</b></label>
-            <input
-                type="password"
-                placeholder="Enter Password"
-                id="pwd"
-                name="pwd"
-                on:input = move |ev| set_pwd(event_target_value(&ev))
-                required
-            />
-            <button type="submit">"Login"</button>
+            <button class="btn btn-primary w-100 py-2" type="submit">"Sign in   "</button>
         </ActionForm>
     }
 }

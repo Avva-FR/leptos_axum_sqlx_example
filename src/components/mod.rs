@@ -1,6 +1,7 @@
-pub mod nav;
-pub mod home;
-pub mod register;
 pub mod about;
-pub mod login;
+pub mod home;
 pub mod jippity;
+pub mod login;
+pub mod nav;
+pub mod blog;
+pub mod register;

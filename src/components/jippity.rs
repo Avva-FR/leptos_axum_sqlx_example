@@ -1,3 +1,4 @@
+/*
 use serde::{Deserialize, Serialize};
 use leptos::{component, view, IntoView, create_signal, create_action, create_effect, ReadSignal, create_node_ref};
 use leptos::html::{Div, Input};
@@ -116,7 +117,7 @@ pub async fn converse(
             inference_callback(
                 stop_sequence,
                 &mut buf,
-                tx, 
+                tx,
                 &mut runtime,
             ),
         )
@@ -140,7 +141,7 @@ pub fn Jippity() -> impl IntoView {
             text: new_msg.clone(),
             from_llm: false,
         };
-        set_conversation.update(move |conv| 
+        set_conversation.update(move |conv|
             conv.messages.push(user_msg));
         // Call the server function here
         converse(conversation.get())
@@ -223,3 +224,4 @@ pub fn TypeArea(send: Action<String, Result<String, ServerFnError>>) -> impl Int
     </div>
     }
 }
+*/

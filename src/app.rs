@@ -1,5 +1,5 @@
 use crate::components::{
-    about::About, home::Home, jippity::Jippity, login::Login, register::Register,
+    about::About, home::Home, login::Login, blog::Blog, register::Register,
 };
 use crate::error_template::{AppError, ErrorTemplate};
 use leptos::*;
@@ -13,6 +13,7 @@ pub mod ssr {
     use leptos::ServerFnError;
     use sqlx::postgres::PgPool;
     pub async fn create_db_conn() -> Result<PgPool, ServerFnError> {
+        // stuff this into an envvar for prod
         let url = "postgres://avva:SomeFancyPwd@localhost:5432/leptos_proj";
         let pool = PgPool::connect(url).await?;
         Ok(pool)
@@ -26,7 +27,11 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
+        //Bootstrap
+        //<Stylesheet id="bootstrap" href="/bootstrap/css/bootstrap.css"/>
+        // extra css
         <Stylesheet id="leptos" href="/pkg/leptos-axum-proj.css"/>
+        
         <Title text="Welcome to Leptos"/>
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
@@ -36,15 +41,36 @@ pub fn App() -> impl IntoView {
             }
             .into_view()
         }>
+        // app 
             <main>
                 <Routes>
                     <Route path="" view=Home/>
+                    <Route path="/blog" view=Blog/>
                     <Route path="/register" view=Register/>
                     <Route path="/login" view=Login/>
-                    <Route path="/jippity" view=Jippity/>
+                    // <Route path="/jippity" view=Jippity/>
                     <Route path="/about" view=About/>
                 </Routes>
             </main>
         </Router>
+        // bootstrap js dependencies
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::ssr::create_db_conn;
+    use sqlx::PgPool;
+    // test if db connection Pool is established 
+    #[tokio::test]
+    async fn test_create_db_conn_success() {
+        let result = create_db_conn().await;
+        assert!(result.is_ok());
+    }
+    // test that db conn wont be established for wrong url
+    #[tokio::test]
+    async fn test_create_db_conn_failure() {
+        let incorrect_url = "postgres://wronguser:wrongpwd@localhost:5432/wrong_db";
+        let pool = PgPool::connect(incorrect_url).await;
+        assert!(pool.is_err());
     }
 }

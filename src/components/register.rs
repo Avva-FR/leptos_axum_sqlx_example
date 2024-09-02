@@ -18,13 +18,7 @@ pub struct User {
 
 pub fn validate_email(email: &str) -> Result<(), &'static str>{
     // refer to https://www.ietf.org/rfc/rfc5322.txt
-    let re = Regex::new("(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*
-    |\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")
-    @(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?
-    |\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}
-    (?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])
-    |[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]
-    |\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])").unwrap();
+    let re = Regex::new(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").unwrap();
     if re.is_match(email) {
         Ok(())
     } else {
@@ -41,7 +35,7 @@ pub fn validate_password(pwd: &str) -> Result<(), &'static str> {
     }
 }
 
-// this is not redudnant dont call add_user_to_db or 
+// this is not redundant  
 #[server(RegisterUser, "/register")]
 pub async fn pass_register_input(user: User) -> Result<(), ServerFnError> {
     add_user_to_db(user).await
@@ -152,4 +146,67 @@ pub fn Register() -> impl IntoView {
             <button type="submit">"Register"</button>
         </ActionForm>
     }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_validate_email_success() {
+        let valid_emails = vec![
+            "test@example.com",
+            "user.name+tag+sorting@example.com",
+            "user_name@example.co.uk",
+            "user@subdomain.example.com",
+        ];
+
+        for email in valid_emails {
+            assert!(validate_email(email).is_ok());
+        }
+    }
+
+    #[test]
+    fn test_validate_email_failure() {
+        let invalid_emails = vec![
+            "plainaddress",
+            "@missingusername.com",
+            "username@.com",
+            "username@.com.",
+            "username@com",
+        ];
+
+        for email in invalid_emails {
+            assert_eq!(validate_email(email), Err("Invalid Username"));
+        }
+    }
+    #[test]
+    fn test_validate_password_success() {
+        let valid_passwords = vec![
+            "Valid123!",
+            "StrongPass1$",
+            "ComplexPwd9@",
+        ];
+
+        for pwd in valid_passwords {
+            assert!(validate_password(pwd).is_ok());
+        }
+    }
+
+    #[test]
+    fn test_validate_password_failure() {
+        let invalid_passwords = vec![
+            "short1!",
+            "nouppercase123!",
+            "NoNumber!",
+            "NoSpecialChar1",
+        ];
+
+        for pwd in invalid_passwords {
+            assert_eq!(
+                validate_password(pwd),
+                Err("Invalid password. It must be at least 8 characters long and contain at least one letter and one number.")
+            );
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ llm = {git = "https://github.com/rustformers/llm.git", branch="main", optional=t
 rand = {version = "0.8.5", optional = true}
 dotenv = {version = "0.15.0", optional = true}
 cfg-if = "1.0.0"
+mockall = "0.13.0"
 
 
 [features]
