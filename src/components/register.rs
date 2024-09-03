@@ -31,7 +31,7 @@ pub fn validate_password(pwd: &str) -> Result<(), &'static str> {
     if re.is_match(pwd) {
         Ok(())
     } else {
-        Err("Invalid password. It must be at least 8 charact    ers long and contain at least one letter and one number.")
+        Err("Invalid password. It must be at least 8 characters long and contain at least one letter and one number.")
     }
 }
 

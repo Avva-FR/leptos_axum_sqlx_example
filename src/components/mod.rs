@@ -5,3 +5,4 @@ pub mod login;
 pub mod nav;
 pub mod blog;
 pub mod register;
+pub mod add_blog;

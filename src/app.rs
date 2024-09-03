@@ -1,5 +1,6 @@
 use crate::components::{
     about::About, home::Home, login::Login, blog::Blog, register::Register,
+    add_blog::BlogAddForm,
 };
 use crate::error_template::{AppError, ErrorTemplate};
 use leptos::*;
@@ -50,6 +51,7 @@ pub fn App() -> impl IntoView {
                     <Route path="/login" view=Login/>
                     // <Route path="/jippity" view=Jippity/>
                     <Route path="/about" view=About/>
+                    <Route path="/addblog" view=BlogAddForm/>
                 </Routes>
             </main>
         </Router>
