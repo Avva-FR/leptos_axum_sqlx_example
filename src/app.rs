@@ -1,6 +1,5 @@
 use crate::components::{
-    about::About, home::Home, login::Login, blog::Blog, register::Register,
-    add_blog::BlogAddForm,
+    about::About, add_blog::BlogAddForm, blog::Blog, home::Home, login::Login, register::Register,
 };
 use crate::error_template::{AppError, ErrorTemplate};
 use leptos::*;
@@ -32,7 +31,7 @@ pub fn App() -> impl IntoView {
         //<Stylesheet id="bootstrap" href="/bootstrap/css/bootstrap.css"/>
         // extra css
         <Stylesheet id="leptos" href="/pkg/leptos-axum-proj.css"/>
-        
+
         <Title text="Welcome to Leptos"/>
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
@@ -42,7 +41,7 @@ pub fn App() -> impl IntoView {
             }
             .into_view()
         }>
-        // app 
+        // app
             <main>
                 <Routes>
                     <Route path="" view=Home/>
@@ -62,7 +61,7 @@ pub fn App() -> impl IntoView {
 mod tests {
     use super::ssr::create_db_conn;
     use sqlx::PgPool;
-    // test if db connection Pool is established 
+    // test if db connection Pool is established
     #[tokio::test]
     async fn test_create_db_conn_success() {
         let result = create_db_conn().await;

@@ -16,7 +16,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // migrate on start
     let db_conn_pool = create_db_conn().await.expect("DB connection failed");
-
     match sqlx::migrate!("./migrations").run(&db_conn_pool).await {
         Ok(_) => println!("Migrations applied successfully"),
         Err(err) => eprintln!("Migration error: {:?}", err),

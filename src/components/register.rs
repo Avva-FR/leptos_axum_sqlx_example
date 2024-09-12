@@ -1,12 +1,12 @@
-use crate::components::nav::Nav;
-use leptos::*;
-use leptos_router::*;
-use leptos::{create_server_action, ServerFnError};
-use leptos::ev::SubmitEvent;
-use serde::{Deserialize, Serialize};
-use regex::Regex;
 #[cfg(feature = "ssr")]
 use crate::app::ssr::create_db_conn;
+use crate::components::nav::Nav;
+use leptos::ev::SubmitEvent;
+use leptos::*;
+use leptos::{create_server_action, ServerFnError};
+use leptos_router::*;
+use regex::Regex;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -16,7 +16,7 @@ pub struct User {
     pwd: String,
 }
 
-pub fn validate_email(email: &str) -> Result<(), &'static str>{
+pub fn validate_email(email: &str) -> Result<(), &'static str> {
     // refer to https://www.ietf.org/rfc/rfc5322.txt
     let re = Regex::new(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").unwrap();
     if re.is_match(email) {
@@ -35,27 +35,28 @@ pub fn validate_password(pwd: &str) -> Result<(), &'static str> {
     }
 }
 
-// this is not redundant  
+// this is not redundant
 #[server(RegisterUser, "/register")]
 pub async fn pass_register_input(user: User) -> Result<(), ServerFnError> {
     add_user_to_db(user).await
 }
 
 #[cfg(feature = "ssr")]
-pub async fn add_user_to_db(user: User) -> Result<(), ServerFnError> {    
+pub async fn add_user_to_db(user: User) -> Result<(), ServerFnError> {
     let pool = create_db_conn().await?;
 
     // check if the user allready exists
-    let exists: (bool,) = sqlx::query_as(
-        "SELECT EXISTS (SELECT 1 FROM user_table WHERE username = $1)"
-    )
-    .bind(&user.username)
-    .fetch_one(&pool)
-    .await?;
+    let exists: (bool,) =
+        sqlx::query_as("SELECT EXISTS (SELECT 1 FROM user_table WHERE username = $1)")
+            .bind(&user.username)
+            .fetch_one(&pool)
+            .await?;
 
     if exists.0 {
         eprintln!("Error: User already exists: username = '{}'", user.username);
-        return Err(ServerFnError::ServerError("User already exists".to_string()));
+        return Err(ServerFnError::ServerError(
+            "User already exists".to_string(),
+        ));
     }
     // if the username does not allready exist we store it in the db
     let query = "INSERT INTO user_table (username, email, pwd) VALUES ($1, $2, $3)";
@@ -65,7 +66,7 @@ pub async fn add_user_to_db(user: User) -> Result<(), ServerFnError> {
         .bind(&user.pwd)
         .execute(&pool)
         .await?;
-    
+
     println!("User added successfully: {:?}", user);
 
     Ok(())
@@ -84,18 +85,19 @@ pub fn Register() -> impl IntoView {
     let (confirmpwd, set_confirmpwd) = create_signal(String::new());
 
     let on_submit = move |ev: SubmitEvent| {
-        ev.prevent_default(); 
+        ev.prevent_default();
 
         if pwd.get() != confirmpwd.get() {
             println!("Passwords do not match!");
         } else {
             // dont touch the app::RegisterUser
-            register_action.dispatch(RegisterUser { user: User {
-                username: username.get().clone(),
-                email: email.get().clone(),
-                pwd: pwd.get().clone(),
-        } });
-
+            register_action.dispatch(RegisterUser {
+                user: User {
+                    username: username.get().clone(),
+                    email: email.get().clone(),
+                    pwd: pwd.get().clone(),
+                },
+            });
         }
     };
 
@@ -181,11 +183,7 @@ mod tests {
     }
     #[test]
     fn test_validate_password_success() {
-        let valid_passwords = vec![
-            "Valid123!",
-            "StrongPass1$",
-            "ComplexPwd9@",
-        ];
+        let valid_passwords = vec!["Valid123!", "StrongPass1$", "ComplexPwd9@"];
 
         for pwd in valid_passwords {
             assert!(validate_password(pwd).is_ok());
@@ -194,12 +192,7 @@ mod tests {
 
     #[test]
     fn test_validate_password_failure() {
-        let invalid_passwords = vec![
-            "short1!",
-            "nouppercase123!",
-            "NoNumber!",
-            "NoSpecialChar1",
-        ];
+        let invalid_passwords = vec!["short1!", "nouppercase123!", "NoNumber!", "NoSpecialChar1"];
 
         for pwd in invalid_passwords {
             assert_eq!(
@@ -208,5 +201,4 @@ mod tests {
             );
         }
     }
-
 }
